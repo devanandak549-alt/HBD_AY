@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Happy Birthday, AYANA!</title>
+    <style>
+        /* --- DESIGN VARIABLES --- */
+        :root {
+            --rose-pink: #FF69B4;
+            --lavender-purple: #9370DB;
+            --rose-gold: #B76E79;
+            --white-glow: #FFFFFF;
+            --cinematic-bg: linear-gradient(135deg, #FFE4E1 0%, #E6E6FA 50%, #FFB6C1 100%);
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: 'Poppins', sans-serif;
+            background: var(--cinematic-bg);
+            overflow-x: hidden;
+            color: #333;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- SCENE 1: BIRTHDAY REVEAL (NOW THE HOMEPAGE) --- */
+        #scene-reveal {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Music Activator Button Overlay */
+        #audio-gateway {
+            position: absolute;
+            z-index: 999;
+            background: rgba(255, 255, 255, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            padding: 1.2rem 2.2rem;
+            color: #333;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            letter-spacing: 1px;
+            font-family: 'Poppins', sans-serif;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center;
+        }
+
+        #audio-gateway:hover {
+            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 10px 25px rgba(255, 105, 180, 0.2);
+        }
+
+        .cake {
+            width: 150px;
+            height: 110px;
+            background: linear-gradient(to bottom, #fcc5e4, var(--rose-gold));
+            border-radius: 12px 12px 0 0;
+            position: relative;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            animation: cakeBounce 3s infinite ease-in-out alternate;
+        }
+
+        @keyframes cakeBounce {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-12px); }
+        }
+
+        .cake::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 22px;
+            background: #fff; border-radius: 12px 12px 0 0;
+        }
+
+        .cake-candle {
+            width: 8px; height: 32px;
+            background: var(--lavender-purple);
+            position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%);
+        }
+
+        .cake-flame {
+            width: 8px; height: 14px; background-color: #ffda00;
+            border-radius: 50%; position: absolute; bottom: 110%; left: 50%; transform: translateX(-50%);
+        }
+
+        .birthday-text {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .main-title {
+            font-size: 3.2rem;
+            font-weight: 700;
+            margin: 0;
+            color: #2c2c2c;
+            line-height: 1.2;
+        }
+
+        .name-title {
+            color: var(--rose-pink);
+            display: block;
+            font-size: 4rem;
+            text-shadow: 0 0 15px rgba(255, 105, 180, 0.5);
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            color: #555;
+            margin-top: 1rem;
+            font-weight: 300;
+            font-style: italic;
+        }
+
+        .scroll-invitation {
+            position: absolute;
+            bottom: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .bouncing-arrow {
+            width: 12px; height: 12px; margin-top: 0.5rem;
+            border-right: 2px solid #555; border-bottom: 2px solid #555;
+            transform: rotate(45deg); animation: arrowBounce 1.5s infinite;
+        }
+
+        @keyframes arrowBounce {
+            0%, 100% { transform: rotate(45deg) translateY(0); }
+            50% { transform: rotate(45deg) translateY(6px); }
+        }
+
+        #confetti-canvas {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 5;
+        }
+
+        /* --- SCENE 2: PHOTO SECTION --- */
+        #scene-photo {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #ffffff;
+            padding: 2rem;
+            box-sizing: border-box;
+        }
+
+        .glass-frame {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 16px;
+            max-width: 360px;
+            width: 100%;
+        }
+
+        .photo-wrapper {
+            width: 100%;
+            overflow: hidden;
+            border-radius: 16px;
+            background-color: #eaeaea;
+        }
+
+        .premium-photo {
+            width: 100%;
+            height: auto;
+            display: block;
+            transform: rotate(-90deg) scale(1.05); /* Fixed landscape rotation to view upright clearly */
+        }
+
+        /* --- SCENE 3: PERSONAL LETTER --- */
+        #scene-letter {
+            min-height: 100vh;
+            background: var(--cinematic-bg);
+            padding: 3rem 1.5rem;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .letter-container {
+            max-width: 520px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.5);
+            padding: 2rem;
+            border-radius: 24px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.04);
+            backdrop-filter: blur(8px);
+        }
+
+        .letter-text {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #333;
+            white-space: pre-wrap;
+        }
+
+        /* --- SCENE 4: INTERACTIVE GIFT --- */
+        #scene-gift {
+            min-height: 100vh;
+            background: #ffffff;
+            padding: 2rem;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .gift-tag {
+            color: #777; font-size: 1rem; margin-bottom: 2.5rem; letter-spacing: 2px;
+        }
+
+        .gift-box-container {
+            position: relative; width: 130px; height: 130px; cursor: pointer;
+        }
+
+        .gift-box {
+            width: 100%; height: 100%; background-color: var(--rose-pink); border-radius: 8px; position: relative;
+        }
+
+        .gift-lid {
+            width: 142px; height: 32px; background-color: #ff94cc; position: absolute;
+            bottom: 100%; left: 50%; transform: translateX(-50%); border-radius: 6px 6px 0 0;
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .gift-ribbon {
+            width: 20px; height: 100%; background-color: var(--rose-gold); position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+        }
+
+        .gift-box-container.opened .gift-lid {
+            transform: translateX(-50%) translateY(-50px) rotate(-15deg); opacity: 0;
+        }
+
+        .gift-box-container.opened .gift-box {
+            transform: scale(0.9); opacity: 0.15;
+        }
+
+        #gift-message {
+            margin-top: 3rem; text-align: center; line-height: 2; font-size: 1.15rem; color: #2c2c2c;
+            display: none;
+        }
+
+        /* --- SCENE 5: STARRY SKY --- */
+        #scene-final {
+            min-height: 100vh;
+            background: radial-gradient(circle at 50% 50%, #0e1124 0%, #05060c 100%);
+            color: #e0e0e0; padding: 4rem 1.5rem; box-sizing: border-box;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            position: relative; overflow: hidden; text-align: center;
+        }
+
+        .starry-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
+
+        .final-content { max-width: 480px; z-index: 10; }
+        .quote-style { font-style: italic; font-size: 1.25rem; color: #bfa3cd; margin-bottom: 3rem; }
+        .skies-style { font-size: 1.1rem; line-height: 2; margin-bottom: 3rem; }
+        .signature-style { font-size: 1.05rem; color: #fff; }
+        .signature-name { color: var(--rose-pink); font-weight: 600; }
+
+        .global-floating-heart {
+            position: fixed; pointer-events: none; z-index: 100; opacity: 0; font-size: 1.2rem;
+        }
+
+        @media (max-width: 600px) {
+            .main-title { font-size: 2.2rem; }
+            .name-title { font-size: 3rem; }
+            .tagline { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BACKGROUND MUSIC TRACK -->
+    <audio id="bg-music" loop preload="auto">
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- MAIN SURFACE CONTAINER -->
+    <main>
+
+        <!-- SCENE 1: CINEMATIC REVEAL EXPLOSION -->
+        <section id="scene-reveal">
+            <canvas id="confetti-canvas"></canvas>
+
+            <!-- Audio unlock mechanism layer built straight over layout -->
+            <button id="audio-gateway">Tap to Play Music ✨</button>
+            
+            <div class="cake" id="birthday-cake-asset">
+                <div class="cake-candle"><div class="cake-flame"></div></div>
+            </div>
+
+            <div class="birthday-text">
+                <h1 class="main-title">HAPPY BIRTHDAY <span class="name-title">AYANA</span> ❤️</h1>
+                <p class="tagline">"Miles apart, but never far away."</p>
+            </div>
+
+            <div class="scroll-invitation">
+                <span>There's something waiting below...</span>
+                <div class="bouncing-arrow"></div>
+            </div>
+        </section>
+
+        <!-- SCENE 2: PHOTO GALLERY -->
+        <section id="scene-photo">
+            <div class="glass-frame">
+                <div class="photo-wrapper">
+                    <img src="photo.jpg" alt="Ayana Feature" class="premium-photo">
+                </div>
+            </div>
+        </section>
+
+        <!-- SCENE 3: REALISTIC TYPEWRITER LETTER -->
+        <section id="scene-letter">
+            <div class="letter-container">
+                <div id="typewriter-output" class="letter-text"></div>
+            </div>
+        </section>
+
+        <!-- SCENE 4: SURPRISE GIFT BOX -->
+        <section id="scene-gift">
+            <div class="gift-tag">One last surprise...</div>
+            <div class="gift-box-container" id="gift-clicker">
+                <div class="gift-lid"></div>
+                <div class="gift-box">
+                    <div class="gift-ribbon"></div>
+                </div>
+            </div>
+            <div id="gift-message">
+                Different cities.<br>
+                Different skies.<br>
+                Same wish for you.<br><br>
+                <strong>Happy Birthday AYANA ❤️</strong>
+            </div>
+        </section>
+
+        <!-- SCENE 5: STARRY COSMOS SIGNATURE -->
+        <section id="scene-final">
+            <canvas id="starfield" class="starry-canvas"></canvas>
+
+            <div class="final-content">
+                <div class="quote-style">"Some people are worth missing."</div>
+                <div class="skies-style">
+                    Different cities.<br>
+                    Different skies.<br>
+                    Same wish for you.<br><br>
+                    <strong>Happy Birthday AYANA ❤️</strong>
+                </div>
+                <div class="signature-style">
+                    With love,<br>
+                    The other irritating minion, <span class="signature-name">Devu ✌️</span>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- --- CORE MOVIE ENGINE --- -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            const audioGateway = document.getElementById('audio-gateway');
+            const bgMusic = document.getElementById('bg-music');
+            const confettiCanvas = document.getElementById('confetti-canvas');
+            const typewriterOutput = document.getElementById('typewriter-output');
+            const giftClicker = document.getElementById('gift-clicker');
+            const giftMessagePlate = document.getElementById('gift-message');
+            const starfieldCanvas = document.getElementById('starfield');
+
+            // Sets audio starting point track skip directly to "Hide far..." segment
+            bgMusic.currentTime = 30; 
+
+            // Fire up active visual systems immediately
+            initializeConfettiExplosion();
+            renderGlobalFloatingHeartsSystem();
+
+            /* --- AUDIO UNLOCK BUTTON HANDLER --- */
+            audioGateway.addEventListener('click', () => {
+                bgMusic.play()
+                    .then(() => {
+                        // Smoothly hide button once clicked
+                        audioGateway.style.opacity = '0';
+                        setTimeout(() => audioGateway.style.display = 'none', 400);
+                    })
+                    .catch(e => console.log("Audio streaming check handled:", e));
+            });
+
+            /* --- CONFETTI EXPLOSION GENERATOR --- */
+            function initializeConfettiExplosion() {
+                const ctx = confettiCanvas.getContext('2d');
+                let width = confettiCanvas.width = window.innerWidth;
+                let height = confettiCanvas.height = window.innerHeight;
+
+                const colors = ['#FF69B4', '#9370DB', '#B76E79', '#FFFFFF', '#FFB6C1'];
+                const particles = [];
+
+                for (let i = 0; i < 90; i++) {
+                    particles.push({
+                        x: Math.random() * width,
+                        y: Math.random() * -height - 20,
+                        r: Math.random() * 6 + 4,
+                        d: Math.random() * colors.length,
+                        vectorX: Math.random() * 4 - 2,
+                        vectorY: Math.random() * 3 + 4,
+                        tilt: Math.random() * 10 - 5
+                    });
+                }
+
+                function renderLoop() {
+                    ctx.clearRect(0, 0, width, height);
+                    let ongoing = false;
+
+                    particles.forEach((p) => {
+                        p.y += p.vectorY;
+                        p.x += p.vectorX;
+                        if (p.y < height) ongoing = true;
+
+                        ctx.beginPath();
+                        ctx.lineWidth = p.r;
+                        ctx.strokeStyle = colors[Math.floor(p.d)];
+                        ctx.moveTo(p.x + p.tilt + p.r / 2, p.y);
+                        ctx.lineTo(p.x + p.tilt, p.y + p.tilt + p.r / 2);
+                        ctx.stroke();
+                    });
+
+                    if (ongoing) requestAnimationFrame(renderLoop);
+                }
+                requestAnimationFrame(renderLoop);
+            }
+
+            /* --- TYPEWRITER CONSOLE TRACER --- */
+            const letterTextContent = "Dear Ayana,\n\nToday is a reminder that the world became brighter because you were born.\n\nEven though we're miles apart now, some people never truly feel distant.\n\nThe memories we made, the laughter we shared, and the friendship we built continue to stay close no matter where life takes us.\n\nI may not be there beside you today, but I am still celebrating you from afar.\n\nThank you for being such an important part of my life.\n\nI hope this year brings you endless happiness, beautiful moments, and dreams that come true.\n\nHappy Birthday, Ayana ❤️";
+
+            let letterTriggered = false;
+            const letterObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !letterTriggered) {
+                        letterTriggered = true;
+                        let currentIdx = 0;
+                        function typeNode() {
+                            if (currentIdx < letterTextContent.length) {
+                                typewriterOutput.textContent += letterTextContent.charAt(currentIdx);
+                                currentIdx++;
+                                setTimeout(typeNode, 40);
+                            }
+                        }
+                        typeNode();
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            letterObserver.observe(document.getElementById('scene-letter'));
+
+            /* --- GIFT BOX ANIMATION --- */
+            giftClicker.addEventListener('click', () => {
+                giftClicker.classList.add('opened');
+                giftMessagePlate.style.display = 'block';
+            });
+
+            /* --- STARRY NIGHT BACKGROUND ENVIRONMENT --- */
+            function initStarfieldSky() {
+                const ctx = starfieldCanvas.getContext('2d');
+                let w = starfieldCanvas.width = window.innerWidth;
+                let h = starfieldCanvas.height = window.innerHeight;
+
+                const starNodes = [];
+                for(let i=0; i<50; i++) {
+                    starNodes.push({
+                        x: Math.random() * w,
+                        y: Math.random() * h,
+                        size: Math.random() * 1.5 + 0.5,
+                        opacity: Math.random(),
+                        speed: Math.random() * 0.02 + 0.005
+                    });
+                }
+
+                function starLoop() {
+                    ctx.clearRect(0,0,w,h);
+                    starNodes.forEach(s => {
+                        s.opacity += s.speed;
+                        if(s.opacity > 1 || s.opacity < 0) s.speed = -s.speed;
+                        ctx.fillStyle = `rgba(255,255,255,${Math.abs(s.opacity)})`;
+                        ctx.beginPath();
+                        ctx.arc(s.x, s.y, s.size, 0, Math.PI*2);
+                        ctx.fill();
+                    });
+                    requestAnimationFrame(starLoop);
+                }
+                requestAnimationFrame(starLoop);
+            }
+            initStarfieldSky();
+
+            /* --- FLOATING BACKGROUND HEARTS LOOP --- */
+            function renderGlobalFloatingHeartsSystem() {
+                setInterval(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'global-floating-heart';
+                    heart.innerHTML = '❤️';
+                    heart.style.left = Math.random() * 90 + 5 + 'vw';
+                    heart.style.top = '105vh';
+                    heart.style.opacity = Math.random() * 0.25 + 0.1;
+                    
+                    document.body.appendChild(heart);
+
+                    heart.animate([
+                        { transform: 'translateY(0) scale(0.8)', opacity: 0.3 },
+                        { transform: `translateY(-115vh) scale(1.1)`, opacity: 0 }
+                    ], {
+                        duration: 6000,
+                        easing: 'linear'
+                    });
+
+                    setTimeout(() => heart.remove(), 6000);
+                }, 900);
+            }
+        });
+    </script>
+</body>
+</html>
